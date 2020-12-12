@@ -38,7 +38,6 @@ export class CommentFormComponent {
   constructor() {}
 
   searchHandler(f: NgForm): void {
-    console.log(f);
     this.search.emit(f.value);
   }
 

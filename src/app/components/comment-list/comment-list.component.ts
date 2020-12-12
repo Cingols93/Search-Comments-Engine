@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Comment } from '../../model/comment';
 
 @Component({
   selector: 'app-comment-list',
