@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Search } from '../../../models/search';
 import { Comment } from '../../../models/comment';
 
@@ -16,7 +16,7 @@ import { Comment } from '../../../models/comment';
       </div>
       <div class="form-group">
         <select class="form-control" name="postId" placeholder="Select post id" [ngModel]= "activeSearch?.postId" [ngClass]= "{'is-invalid': f.controls.postId?.invalid && f.submitted}" required>
-          <option value="0" disabled [ngValue]="null">Select post id</option>
+          <option value="0" disabled [ngValue]= "null">Select post id</option>
           <option *ngFor="let postId of postIds" [ngValue]= "postId"> {{postId}}</option>
         </select>
         <div class="invalid-feedback" *ngIf= "{'is-invalid': f.controls.postId?.invalid && f.submitted}">
@@ -41,17 +41,17 @@ export class CommentFormComponent {
   @Output() search: EventEmitter<Comment> = new EventEmitter<Comment>();
   @Output() reset: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor() {}
+  constructor() { }
 
   searchHandler(f: NgForm): void {
-    if(f.valid){
+    if (f.valid) {
       this.search.emit(f.value);
     }
   }
 
   resetHandler(f: NgForm): void {
+    f.resetForm();
     this.reset.emit();
-    f.reset();
   }
 
 }

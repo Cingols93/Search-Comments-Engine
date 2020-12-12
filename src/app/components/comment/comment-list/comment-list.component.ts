@@ -11,7 +11,7 @@ import { Comment } from '../../../models/comment';
           [comment]="comment"
         ></app-comment-list-item>
       </div>
-      <pagination-controls (pageChange) = "p = $event" class="text-center" ></pagination-controls>
+      <pagination-controls *ngIf="comments.length > 20" (pageChange) = "p = $event" class="text-center" ></pagination-controls>
     </div>
 
     <h2 *ngIf="comments && comments.length == 0" class="text-center font-weight-bold">
