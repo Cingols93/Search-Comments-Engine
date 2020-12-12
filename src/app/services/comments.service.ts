@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Comment } from '../model/comment';
-import { Search } from '../model/search';
+import { Comment } from '../models/comment';
+import { Search } from '../models/search';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,9 @@ export class CommentsService {
   postIds: number[];
   activeSearch: Search;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  init(): void{
+  init(): void {
     this.http.get<Comment[]>('https://jsonplaceholder.typicode.com/comments')
       .subscribe(res => {
         this.comments = res;
@@ -26,12 +26,14 @@ export class CommentsService {
       this.init();
     } else {
       //Filtered list by postId
-      this.comments = this.comments.filter(res => {
-        return (res.name.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
-          || res.body.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
-          || res.email.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase()))
-          && res.postId == comment.postId;
-      })
+      this.http.get<Comment[]>(`https://jsonplaceholder.typicode.com/comments?postId=${comment.postId}`)
+        .subscribe(comments => {
+          this.comments = comments.filter(res => {
+            return (res.name.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
+              || res.body.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
+              || res.email.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase()));
+          });
+        });
     }
   }
 
@@ -39,9 +41,5 @@ export class CommentsService {
     this.activeSearch = {} as Search;
     this.init();
   }
-
-
-
-
 
 }

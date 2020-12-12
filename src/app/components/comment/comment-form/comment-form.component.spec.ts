@@ -21,28 +21,7 @@ describe('CommentFormComponent', () => {
             de = fixture.debugElement.query(By.css('form'));
             el = de.nativeElement;
             fixture.detectChanges();
-
-            component.postIds = [ 1, 2, 3 ];
         });
-    }));
-
-    it('should call the submit method', async(() => {
-        fixture.detectChanges();
-        spyOn(component, 'searchHandler');
-        component.form.controls['text'].setValue('id labore');
-        component.form.controls['postId'].setValue(1);
-        component.searchHandler(component.form);
-        el = fixture.debugElement.query(By.css('#searchButton')).nativeElement;
-        el.click();
-        expect(component.searchHandler).toHaveBeenCalledTimes(1);
-    }));
-
-    it('should call the reset method', async(() => {
-        fixture.detectChanges();
-        spyOn(component, 'resetHandler');
-        el = fixture.debugElement.query(By.css('#resetButton')).nativeElement;
-        el.click();
-        expect(component.resetHandler).toHaveBeenCalledTimes(1);
     }));
 
     it('form should be invalid when empty', async(() => {
@@ -57,18 +36,18 @@ describe('CommentFormComponent', () => {
         expect(component.form.form.valid).toBeTruthy();
     }));
 
-    it('should call the `searchHandler` method on the `CommentsService`', () => {
+    it('should call the `searchHandler` method on the `CommentsService`', async(() => {
         const spy = spyOn(component, 'searchHandler').and.callThrough();
         expect(spy).not.toHaveBeenCalled();
         component.searchHandler(component.form);
         expect(spy).toHaveBeenCalledTimes(1);
-      });
+    }));
 
-      it('should call the `resetHandler` method on the `CommentsService`', () => {
+    it('should call the `resetHandler` method on the `CommentsService`', async(() => {
         const spy = spyOn(component, 'resetHandler').and.callThrough();
         expect(spy).not.toHaveBeenCalled();
         component.resetHandler(component.form);
         expect(spy).toHaveBeenCalledTimes(1);
-      });
+    }));
 
 });

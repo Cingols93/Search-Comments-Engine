@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { NgForm} from '@angular/forms';
-import { Search } from '../../model/search';
-import { Comment } from '../../model/comment';
+import { Search } from '../../../models/search';
+import { Comment } from '../../../models/comment';
 
 @Component({
   selector: 'app-comment-form',
@@ -9,16 +9,22 @@ import { Comment } from '../../model/comment';
   <div class="container">
     <form #f="ngForm" (submit)="searchHandler(f)">
       <div class="form-group">
-        <input class="form-control" placeholder="Search by name, email and body (min 3 char)" id="text" type="text" name="text" [ngModel]= "activeSearch?.text" minlength = "3" required>
+        <input class="form-control" [ngClass]= "{'is-invalid': f.controls.text?.invalid && f.submitted}" placeholder="Search by name, email and body" id="text" type="text" name="text" [ngModel]= "activeSearch?.text" minlength = "3" required>
+        <div class="invalid-feedback" *ngIf= "{'is-invalid': f.controls.text?.invalid && f.submitted}">
+          Please write a valid text (min 3 char).
+        </div>
       </div>
       <div class="form-group">
-        <select class="form-control" name="postId" placeholder="Select post id" [ngModel]= "activeSearch?.postId" required>
+        <select class="form-control" name="postId" placeholder="Select post id" [ngModel]= "activeSearch?.postId" [ngClass]= "{'is-invalid': f.controls.postId?.invalid && f.submitted}" required>
           <option value="0" disabled [ngValue]="null">Select post id</option>
           <option *ngFor="let postId of postIds" [ngValue]= "postId"> {{postId}}</option>
         </select>
+        <div class="invalid-feedback" *ngIf= "{'is-invalid': f.controls.postId?.invalid && f.submitted}">
+          Please select a post id.
+        </div>
       </div>
       <div class="form-group">
-      <button id="searchButton" class="btn btn-primary mr-2" type="submit" [disabled]="f.invalid">
+      <button id="searchButton" class="btn btn-danger mr-2" type="submit">
         <i class="fa fa-search"></i>
         Search
       </button>
@@ -38,7 +44,9 @@ export class CommentFormComponent {
   constructor() {}
 
   searchHandler(f: NgForm): void {
-    this.search.emit(f.value);
+    if(f.valid){
+      this.search.emit(f.value);
+    }
   }
 
   resetHandler(f: NgForm): void {

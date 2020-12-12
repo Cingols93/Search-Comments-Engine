@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { CommentComponent } from './components/comment/comment.component';
-import { CommentListComponent } from './components/comment-list/comment-list.component';
-import { CommentFormComponent } from './components/comment-form/comment-form.component';
-import { CommentListItemComponent } from './components/comment-list-item/comment-list-item.component';
+import { CommentListComponent } from './components/comment/comment-list/comment-list.component';
+import { CommentFormComponent } from './components/comment/comment-form/comment-form.component';
+import { CommentListItemComponent } from './components/comment/comment-list-item/comment-list-item.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';

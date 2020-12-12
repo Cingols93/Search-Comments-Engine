@@ -1,14 +1,16 @@
 import { Component, Input } from '@angular/core';
-import { Comment } from '../../model/comment';
+import { Comment } from '../../../models/comment';
 
 @Component({
   selector: 'app-comment-list',
   template: `
     <div *ngIf="comments && comments.length > 0">
-      <app-comment-list-item
-        *ngFor="let comment of comments | paginate: { itemsPerPage: 20 ,currentPage:p };"
-        [comment]="comment"
-      ></app-comment-list-item>
+      <div class="mb-3">
+        <app-comment-list-item
+          *ngFor="let comment of comments | paginate: { itemsPerPage: 20 ,currentPage:p };"
+          [comment]="comment"
+        ></app-comment-list-item>
+      </div>
       <pagination-controls (pageChange) = "p = $event" class="text-center" ></pagination-controls>
     </div>
 

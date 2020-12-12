@@ -32,7 +32,7 @@ describe('UsersService', () => {
 
         service.postIds = Array.from(new Set(service.comments.map(item => item.postId)));
 
-        service.activeSearch = { 
+        service.activeSearch = {
             "postId": 1,
             "text": "id labore"
         };
@@ -42,15 +42,15 @@ describe('UsersService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should call the `init` method on the `CommentsService`', () => {
+    it('should call `init` method', () => {
         const spy = spyOn(service, 'init').and.callThrough();
         expect(spy).not.toHaveBeenCalled();
         service.init();
         expect(spy).toHaveBeenCalledTimes(1);
         expect(service.comments.length).toBe(2);
-      });
+    });
 
-    it('should be search data', () => {
+    it('should call `searchHandler` method', () => {
         const spy = spyOn(service, 'searchHandler').and.callThrough();
         expect(spy).not.toHaveBeenCalled();
         service.searchHandler(service.activeSearch)
@@ -58,7 +58,7 @@ describe('UsersService', () => {
         expect(service.comments.length).toBe(1);
     });
 
-    it('should be reset filter', () => {
+    it('should call `resetHandler` method', () => {
         const spy = spyOn(service, 'resetHandler').and.callThrough();
         expect(spy).not.toHaveBeenCalled();
         service.resetHandler();

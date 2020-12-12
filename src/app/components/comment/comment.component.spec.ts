@@ -13,9 +13,9 @@ describe('CommentComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule,
         HttpClientTestingModule],
-      declarations: [ CommentComponent ]
+      declarations: [CommentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -27,10 +27,6 @@ describe('CommentComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should display title'), async(() =>{
-    expect(html.querySelector('h1').textContent).toContain('Search Comments Engine');
   });
 
 });
