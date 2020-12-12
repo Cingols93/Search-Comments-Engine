@@ -7,7 +7,6 @@ import { CommentsService } from './comments.service';
 
 describe('UsersService', () => {
     let service: CommentsService;
-
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientModule,
@@ -43,18 +42,27 @@ describe('UsersService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should be init data', () => {
+    it('should call the `init` method on the `CommentsService`', () => {
+        const spy = spyOn(service, 'init').and.callThrough();
+        expect(spy).not.toHaveBeenCalled();
         service.init();
+        expect(spy).toHaveBeenCalledTimes(1);
         expect(service.comments.length).toBe(2);
-    });
+      });
 
     it('should be search data', () => {
+        const spy = spyOn(service, 'searchHandler').and.callThrough();
+        expect(spy).not.toHaveBeenCalled();
         service.searchHandler(service.activeSearch)
+        expect(spy).toHaveBeenCalledTimes(1);
         expect(service.comments.length).toBe(1);
     });
 
     it('should be reset filter', () => {
+        const spy = spyOn(service, 'resetHandler').and.callThrough();
+        expect(spy).not.toHaveBeenCalled();
         service.resetHandler();
+        expect(spy).toHaveBeenCalledTimes(1);
         expect(service.comments.length).toBe(2);
     });
 });

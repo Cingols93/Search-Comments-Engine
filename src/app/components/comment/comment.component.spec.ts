@@ -29,7 +29,8 @@ describe('CommentComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display title'), () =>{
+  it('should display title'), async(() =>{
     expect(html.querySelector('h1').textContent).toContain('Search Comments Engine');
-  }
+  });
+
 });

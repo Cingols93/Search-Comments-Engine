@@ -57,4 +57,18 @@ describe('CommentFormComponent', () => {
         expect(component.form.form.valid).toBeTruthy();
     }));
 
+    it('should call the `searchHandler` method on the `CommentsService`', () => {
+        const spy = spyOn(component, 'searchHandler').and.callThrough();
+        expect(spy).not.toHaveBeenCalled();
+        component.searchHandler(component.form);
+        expect(spy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should call the `resetHandler` method on the `CommentsService`', () => {
+        const spy = spyOn(component, 'resetHandler').and.callThrough();
+        expect(spy).not.toHaveBeenCalled();
+        component.resetHandler(component.form);
+        expect(spy).toHaveBeenCalledTimes(1);
+      });
+
 });

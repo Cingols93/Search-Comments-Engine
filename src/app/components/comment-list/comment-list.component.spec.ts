@@ -33,7 +33,7 @@ describe('CommentListComponent', () => {
           "body": "ut dolorum nostrum id quia aut est\nfuga est inventore vel eligendi explicabo quis consectetur\naut occaecati repellat id natus quo est\nut blanditiis quia ut vel ut maiores ea"
       }
   ];
-  
+
   });
 
   it('should create', () => {
