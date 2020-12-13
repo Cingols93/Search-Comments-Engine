@@ -30,6 +30,8 @@ describe('UsersService', () => {
             }
         ];
 
+        service.allComments = service.comments;
+
         service.postIds = Array.from(new Set(service.comments.map(item => item.postId)));
 
         service.activeSearch = {

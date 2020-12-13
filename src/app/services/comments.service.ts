@@ -10,26 +10,27 @@ export class CommentsService {
   comments: Comment[];
   postIds: number[];
   activeSearch: Search;
+  allComments: Comment[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  init(): void {
+  init(): void{
     this.http.get<Comment[]>('https://jsonplaceholder.typicode.com/comments')
       .subscribe(res => {
         this.comments = res;
+        this.allComments = res;
         this.postIds = Array.from(new Set(this.comments.map(item => item.postId)));
       });
   }
 
   searchHandler(comment: Search): void {
-    this.http.get<Comment[]>(`https://jsonplaceholder.typicode.com/comments?postId=${comment.postId}`)
-      .subscribe(comments => {
-        this.comments = comments.filter(res => {
-          return (res.name.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
-            || res.body.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
-            || res.email.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase()));
-        });
-      });
+      //Filtered list by postId
+      this.comments = this.allComments.filter(res => {
+        return (res.name.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
+          || res.body.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
+          || res.email.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase()))
+          && res.postId == comment.postId;
+      })
   }
 
   resetHandler(): void {
