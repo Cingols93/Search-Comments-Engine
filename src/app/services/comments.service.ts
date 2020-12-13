@@ -22,23 +22,17 @@ export class CommentsService {
   }
 
   searchHandler(comment: Search): void {
-    if (comment.text === "" || comment.text.length < 3 || comment.postId === 0) {
-      this.init();
-    } else {
-      //Filtered list by postId
-      this.http.get<Comment[]>(`https://jsonplaceholder.typicode.com/comments?postId=${comment.postId}`)
-        .subscribe(comments => {
-          this.comments = comments.filter(res => {
-            return (res.name.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
-              || res.body.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
-              || res.email.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase()));
-          });
+    this.http.get<Comment[]>(`https://jsonplaceholder.typicode.com/comments?postId=${comment.postId}`)
+      .subscribe(comments => {
+        this.comments = comments.filter(res => {
+          return (res.name.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
+            || res.body.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase())
+            || res.email.toLocaleLowerCase().includes(comment.text.toLocaleLowerCase()));
         });
-    }
+      });
   }
 
   resetHandler(): void {
-    this.activeSearch = {} as Search;
     this.init();
   }
 
