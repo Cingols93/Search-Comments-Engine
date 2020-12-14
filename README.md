@@ -4,7 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `npm install` for install all dependencies and once installed Run `npm start` to execute the project. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm install` for install all dependencies 
+Run `npm start` to execute the project. 
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Running unit tests
 
